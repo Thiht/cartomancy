@@ -5,6 +5,7 @@ node_modules/
 *.log
 
 # Generated Files
+coverage/
 dist/
 
 # IDE/Editor Files

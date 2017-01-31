@@ -9,7 +9,8 @@
     "start": "gulp serve",
     "build": "gulp",
     "lint": "eslint --ext .js index.js gulpfile.babel.js config server",
-    "test": "jest __tests__ --verbose"
+    "test": "jest --testPathPattern=__tests__ --verbose",
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
