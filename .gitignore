@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Log Files
+*.log
+
+# Generated Files
+dist/
+
+# IDE/Editor Files
+.vscode/
