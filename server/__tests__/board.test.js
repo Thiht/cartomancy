@@ -5,7 +5,7 @@ import request from 'supertest'
 
 afterEach(() => mongoose.connection.db.dropDatabase())
 
-describe('Board APIs', () => {
+describe('Boards API', () => {
   describe('GET /api/boards', () =>
     it('should return an empty list', done =>
       request(app)
