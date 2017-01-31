@@ -61,9 +61,11 @@ app.use((req, res, next) => {
   return next(err)
 })
 
-app.use(expressWinston.errorLogger({
-  winstonInstance
-}))
+if (config.env !== 'test') {
+  app.use(expressWinston.errorLogger({
+    winstonInstance
+  }))
+}
 
 app.use((err, req, res, next) =>
   res.status(err.status).json({
