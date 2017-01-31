@@ -2,7 +2,7 @@ import app from '../index'
 import httpStatus from 'http-status'
 import request from 'supertest'
 
-describe('API', () => {
+describe('Miscellaneous API', () => {
   describe('GET /api/health-check', () =>
     it('should return OK', done =>
       request(app)
@@ -26,5 +26,19 @@ describe('API', () => {
           done()
         })
         .catch(done.fail)
+    )
+  )
+
+  describe('Error Handling', () =>
+    it('should handle an invalid ObjectId', done =>
+      request(app)
+        .get('/api/boards/1234567890')
+        .expect(httpStatus.INTERNAL_SERVER_ERROR)
+        .then(res => {
+          expect(res.body.message).toEqual('Internal Server Error')
+          done()
+        })
+        .catch(done.fail)
+    )
   )
 })
