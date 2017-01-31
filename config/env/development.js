@@ -2,5 +2,5 @@ export default {
   env: 'development',
   MONGOOSE_DEBUG: true,
   db: 'mongodb://localhost/cartomancy-development',
-  port: 8080
+  port: 8090
 }
