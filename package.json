@@ -1,5 +1,5 @@
 {
-  "name": "cartomancy",
+  "name": "cartomancy-backend",
   "version": "1.0.0",
   "description": "See the future in the cards...",
   "author": "Thibaut Rousseau",
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Thiht/cartomancy.git"
+    "url": "git+https://github.com/Thiht/cartomancy-backend.git"
   },
   "bugs": {
-    "url": "https://github.com/Thiht/cartomancy/issues"
+    "url": "https://github.com/Thiht/cartomancy-backend/issues"
   },
-  "homepage": "https://github.com/Thiht/cartomancy#readme",
+  "homepage": "https://github.com/Thiht/cartomancy-backend#readme",
   "keywords": [
     "kanban",
     "trello",
