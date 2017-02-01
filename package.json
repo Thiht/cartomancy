@@ -65,5 +65,5 @@
     "run-sequence": "^1.2.2",
     "supertest": "^3.0.0"
   },
-  "license": "MIT"
+  "license": "AGPL-3.0"
 }
