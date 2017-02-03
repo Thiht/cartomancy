@@ -39,9 +39,10 @@ export default {
   },
 
   updateCard: {
-    body: {
-      title: Joi.string().required()
-    },
+    body: Joi.object().keys({
+      title: Joi.string(),
+      newListID: Joi.string().hex()
+    }).or('title', 'newListID'),
     params: {
       boardID: Joi.string().hex().required(),
       listID: Joi.string().hex().required(),

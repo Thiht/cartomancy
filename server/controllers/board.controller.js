@@ -96,7 +96,16 @@ function updateCard (req, res, next) {
   const board = req.board
 
   const card = board.lists.id(req.params.listID).cards.id(req.params.cardID)
-  card.title = req.body.title
+
+  // Move the card to another list
+  if (req.body.newListID) {
+    board.lists.id(req.params.listID).cards.id(req.params.cardID).remove()
+    board.lists.id(req.body.newListID).cards.push(card)
+  }
+
+  if (req.body.title) {
+    card.title = req.body.title
+  }
 
   board.save()
     .then(savedBoard => res.json(savedBoard))
