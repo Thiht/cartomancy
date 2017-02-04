@@ -4,8 +4,7 @@ import boardRoutes from './board.route'
 const router = express.Router()
 
 router.get('/health-check', (req, res) => {
-  console.log(req.wss.clients)
-  req.wss.broadcast('OK')
+  req.wss.broadcast('health-check', 'OK')
   res.send('OK')
 })
 

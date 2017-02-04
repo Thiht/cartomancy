@@ -46,7 +46,7 @@ function removeBoard (req, res, next) {
 }
 
 function createList (req, res, next) {
-  const board = req.board
+  const { board, wss } = req
 
   const list = {
     title: req.body.title
@@ -54,33 +54,42 @@ function createList (req, res, next) {
   board.lists.push(list)
 
   board.save()
-    .then(savedBoard => res.json(savedBoard))
+    .then(savedBoard => {
+      wss.broadcast(board._id, savedBoard)
+      res.json(savedBoard)
+    })
     .catch(e => next(e))
 }
 
 function updateList (req, res, next) {
-  const board = req.board
+  const { board, wss } = req
 
   const list = board.lists.id(req.params.listID)
   list.title = req.body.title
 
   board.save()
-    .then(savedBoard => res.json(savedBoard))
+    .then(savedBoard => {
+      wss.broadcast(board._id, savedBoard)
+      res.json(savedBoard)
+    })
     .catch(e => next(e))
 }
 
 function removeList (req, res, next) {
-  const board = req.board
+  const { board, wss } = req
 
   board.lists.id(req.params.listID).remove()
 
   board.save()
-    .then(savedBoard => res.json(savedBoard))
+    .then(savedBoard => {
+      wss.broadcast(board._id, savedBoard)
+      res.json(savedBoard)
+    })
     .catch(e => next(e))
 }
 
 function createCard (req, res, next) {
-  const board = req.board
+  const { board, wss } = req
 
   const card = {
     title: req.body.title
@@ -88,12 +97,15 @@ function createCard (req, res, next) {
   board.lists.id(req.params.listID).cards.push(card)
 
   board.save()
-    .then(savedBoard => res.json(savedBoard))
+    .then(savedBoard => {
+      wss.broadcast(board._id, savedBoard)
+      res.json(savedBoard)
+    })
     .catch(e => next(e))
 }
 
 function updateCard (req, res, next) {
-  const board = req.board
+  const { board, wss } = req
 
   const card = board.lists.id(req.params.listID).cards.id(req.params.cardID)
 
@@ -108,17 +120,23 @@ function updateCard (req, res, next) {
   }
 
   board.save()
-    .then(savedBoard => res.json(savedBoard))
+    .then(savedBoard => {
+      wss.broadcast(board._id, savedBoard)
+      res.json(savedBoard)
+    })
     .catch(e => next(e))
 }
 
 function removeCard (req, res, next) {
-  const board = req.board
+  const { board, wss } = req
 
   board.lists.id(req.params.listID).cards.id(req.params.cardID).remove()
 
   board.save()
-    .then(savedBoard => res.json(savedBoard))
+    .then(savedBoard => {
+      wss.broadcast(board._id, savedBoard)
+      res.json(savedBoard)
+    })
     .catch(e => next(e))
 }
 
