@@ -1,4 +1,4 @@
-import app from './express'
+import server from './express'
 import debugModule from 'debug'
 import mongoose from 'mongoose'
 import util from 'util'
@@ -28,9 +28,9 @@ if (config.MONGOOSE_DEBUG) {
 }
 
 if (!module.parent) {
-  app.listen(config.port, () =>
+  server.listen(config.port, () =>
     debug(`server started on port ${config.port} (${config.env})`)
   )
 }
 
-export default app
+export default server

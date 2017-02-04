@@ -1,4 +1,4 @@
-import app from '../index'
+import server from '../index'
 import httpStatus from 'http-status'
 import mongoose from 'mongoose'
 import request from 'supertest'
@@ -8,7 +8,7 @@ afterEach(() => mongoose.connection.db.dropDatabase())
 describe('Boards API', () => {
   describe('GET /api/boards', () =>
     it('should return an empty list', done =>
-      request(app)
+      request(server)
         .get('/api/boards')
         .expect(httpStatus.OK)
         .then(res => {
@@ -24,7 +24,7 @@ describe('Boards API', () => {
       const board = {
         title: 'Cartomancy Board'
       }
-      request(app)
+      request(server)
         .post('/api/boards')
         .send(board)
         .expect(httpStatus.OK)
@@ -42,12 +42,12 @@ describe('Boards API', () => {
         title: 'Cartomancy Board'
       }
       const newTitle = 'Modified Board Title'
-      request(app)
+      request(server)
         .post('/api/boards')
         .send(board)
         .then(res => {
           const boardID = res.body._id
-          request(app)
+          request(server)
             .put(`/api/boards/${boardID}`)
             .send({ title: newTitle })
             .expect(httpStatus.OK)
