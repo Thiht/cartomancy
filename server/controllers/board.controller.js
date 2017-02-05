@@ -106,17 +106,26 @@ function createCard (req, res, next) {
 
 function updateCard (req, res, next) {
   const { board, wss } = req
+  const { listID, cardID } = req.params
+  const { newListID, title, position } = req.body
 
-  const card = board.lists.id(req.params.listID).cards.id(req.params.cardID)
+  const card = board.lists.id(listID).cards.id(cardID)
 
   // Move the card to another list
-  if (req.body.newListID) {
-    board.lists.id(req.params.listID).cards.id(req.params.cardID).remove()
-    board.lists.id(req.body.newListID).cards.push(card)
+  if (typeof newListID !== 'undefined') {
+    board.lists.id(listID).cards.id(cardID).remove()
+    board.lists.id(newListID).cards.push(card)
   }
 
-  if (req.body.title) {
-    card.title = req.body.title
+  if (typeof title !== 'undefined') {
+    card.title = title
+  }
+
+  // Move the position of the card in its list
+  if (typeof position !== 'undefined') {
+    const actualListID = newListID || listID
+    board.lists.id(actualListID).cards.id(cardID).remove()
+    board.lists.id(actualListID).cards.splice(position, 0, card)
   }
 
   board.save()
