@@ -43,4 +43,4 @@ You can then run the server with a process manager such as [pm2](http://pm2.keym
 
 ## License
 
-See the [LICENSE](./LICENSE) file.
+See the [LICENSE](./LICENSE.md) file.
