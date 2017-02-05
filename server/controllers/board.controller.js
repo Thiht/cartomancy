@@ -47,9 +47,10 @@ function removeBoard (req, res, next) {
 
 function createList (req, res, next) {
   const { board, wss } = req
+  const { title } = req.body
 
   const list = {
-    title: req.body.title
+    title
   }
   board.lists.push(list)
 
@@ -63,9 +64,11 @@ function createList (req, res, next) {
 
 function updateList (req, res, next) {
   const { board, wss } = req
+  const { listID } = req.params
+  const { title } = req.body
 
-  const list = board.lists.id(req.params.listID)
-  list.title = req.body.title
+  const list = board.lists.id(listID)
+  list.title = title
 
   board.save()
     .then(savedBoard => {
@@ -77,8 +80,9 @@ function updateList (req, res, next) {
 
 function removeList (req, res, next) {
   const { board, wss } = req
+  const { listID } = req.params
 
-  board.lists.id(req.params.listID).remove()
+  board.lists.id(listID).remove()
 
   board.save()
     .then(savedBoard => {
@@ -90,11 +94,13 @@ function removeList (req, res, next) {
 
 function createCard (req, res, next) {
   const { board, wss } = req
+  const { listID } = req.params
+  const { title } = req.body
 
   const card = {
-    title: req.body.title
+    title
   }
-  board.lists.id(req.params.listID).cards.push(card)
+  board.lists.id(listID).cards.push(card)
 
   board.save()
     .then(savedBoard => {
@@ -138,8 +144,9 @@ function updateCard (req, res, next) {
 
 function removeCard (req, res, next) {
   const { board, wss } = req
+  const { listID, cardID } = req.params
 
-  board.lists.id(req.params.listID).cards.id(req.params.cardID).remove()
+  board.lists.id(listID).cards.id(cardID).remove()
 
   board.save()
     .then(savedBoard => {
