@@ -26,6 +26,7 @@
     "board"
   ],
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.0",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
@@ -37,9 +38,13 @@
     "helmet": "^3.4.0",
     "http-status": "^1.0.0",
     "joi": "^10.2.0",
+    "jsonwebtoken": "^7.2.1",
     "method-override": "^2.3.7",
     "mongoose": "^4.8.0",
     "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
     "winston": "^2.3.1",
     "ws": "^2.0.2"
   },

@@ -1,19 +1,21 @@
 import express from 'express'
+import expressValidation from 'express-validation'
+import expressWinston from 'express-winston'
 import http from 'http'
+import httpStatus from 'http-status'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import compress from 'compression'
 import methodOverride from 'method-override'
-import cors from 'cors'
-import httpStatus from 'http-status'
-import expressWinston from 'express-winston'
-import expressValidation from 'express-validation'
 import helmet from 'helmet'
+import cors from 'cors'
+
+import APIError from './helpers/APIError'
+import passport from './passport'
+import routes from './routes/index.route'
 import websocket from './websocket'
 import winstonInstance from './winston'
-import routes from './routes/index.route'
-import APIError from './helpers/APIError'
 
 import config from '../config'
 
@@ -39,6 +41,8 @@ app.use(compress())
 app.use(methodOverride())
 app.use(helmet())
 app.use(cors())
+
+app.use(passport.initialize())
 
 if (config.env === 'development') {
   expressWinston.requestWhitelist.push('body')

@@ -49,5 +49,20 @@ export default {
       listID: Joi.string().hex().required(),
       cardID: Joi.string().hex().required()
     }
+  },
+
+  createUser: {
+    body: Joi.object().keys({
+      username: Joi.string().trim().required(),
+      email: Joi.string().trim().lowercase().email().required(),
+      password: Joi.string().min(8).required()
+    })
+  },
+
+  createToken: {
+    body: Joi.object().keys({
+      email: Joi.string().email().required(),
+      password: Joi.string().required()
+    })
   }
 }
