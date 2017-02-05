@@ -15,7 +15,7 @@ import winstonInstance from './winston'
 import routes from './routes/index.route'
 import APIError from './helpers/APIError'
 
-import config from '../config/env'
+import config from '../config'
 
 const app = express()
 const server = http.createServer(app)

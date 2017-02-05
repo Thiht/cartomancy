@@ -3,7 +3,7 @@ import debugModule from 'debug'
 import mongoose from 'mongoose'
 import util from 'util'
 
-import config from '../config/env'
+import config from '../config'
 
 const debug = debugModule('cartomancy:index')
 
