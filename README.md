@@ -13,7 +13,7 @@ This is the backend of Cartomancy.
 ### Requirements:
 
 * [NodeJS](https://nodejs.org/en/), at least the LTS version.
-* [MongoDB](https://www.mongodb.com/fr), running on [http://localhost:27017/](http://localhost:27017/) by default. This can be configured in the [environment config files](./config).
+* [MongoDB](https://www.mongodb.com/fr), running on [mongodb://localhost:27017/](mongodb://localhost:27017/) by default. This can be configured in the [environment config files](./config).
 
 Before anything, install the dependencies:
 
