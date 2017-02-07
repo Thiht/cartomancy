@@ -56,8 +56,8 @@ export default {
       username: Joi.string().trim().required(),
       password: Joi.string().min(8).required(),
       email: Joi.string().trim().lowercase().email().required(),
-      firstName: Joi.string().trim(),
-      lastName: Joi.string().trim()
+      firstName: Joi.string().trim().empty(''),
+      lastName: Joi.string().trim().empty('')
     })
   },
 
