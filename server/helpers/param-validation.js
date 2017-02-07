@@ -54,14 +54,16 @@ export default {
   createUser: {
     body: Joi.object().keys({
       username: Joi.string().trim().required(),
+      password: Joi.string().min(8).required(),
       email: Joi.string().trim().lowercase().email().required(),
-      password: Joi.string().min(8).required()
+      firstName: Joi.string().trim(),
+      lastName: Joi.string().trim()
     })
   },
 
   createToken: {
     body: Joi.object().keys({
-      email: Joi.string().email().required(),
+      username: Joi.string().trim().required(),
       password: Joi.string().required()
     })
   }

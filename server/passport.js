@@ -9,39 +9,39 @@ passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser((id, done) => User.findById(id, done))
 
 const localStrategy = callback => new Local.Strategy({
-  usernameField: 'email',
-  passwordField: 'password',
   passReqToCallback: true
 }, callback)
 
-const register = (req, email, password, done) => {
+const register = (req, username, password, done) => {
   User
-    .findOne({ 'local.email': email })
+    .findOne({ username })
     .exec()
     .then(user => {
       if (user) {
         throw new Error('Already used e-mail address')
       }
 
-      const newUser = new User()
-      newUser.local = {
-        username: req.body.username,
-        email,
-        password: newUser.generateHash(password)
-      }
+      const newUser = new User({
+        username,
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+      })
+      newUser.password = newUser.generateHash(password)
 
       return newUser.save()
     })
     .then(user => {
-      user.local.password = undefined
+      user.password = undefined
+      user.__v = undefined
       done(null, user)
     })
     .catch(err => done(err, false))
 }
 
-const login = (req, email, password, done) => {
+const login = (req, username, password, done) => {
   User
-    .findOne({ 'local.email': email })
+    .findOne({ username })
     .exec()
     .then(user => {
       if (!user) {
@@ -55,7 +55,8 @@ const login = (req, email, password, done) => {
       return user
     })
     .then(user => {
-      user.local.password = undefined
+      user.password = undefined
+      user.__v = undefined
       done(null, user)
     })
     .catch(err => done(err, false))

@@ -16,7 +16,10 @@ function createUser (req, res, next) {
       config.JWT_SECRET,
       { expiresIn: '7 days' }
     )
-    return res.json({ token })
+    return res.json({
+      token,
+      authenticatedUser: user
+    })
   })(req, res, next)
 }
 
