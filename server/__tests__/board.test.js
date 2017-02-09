@@ -21,15 +21,10 @@ describe('Boards API', () => {
 
   describe('POST /api/boards', () =>
     it('should create a new board', done => {
-      const board = {
-        title: 'Cartomancy Board'
-      }
-      request(server)
-        .post('/api/boards')
-        .send(board)
-        .expect(httpStatus.OK)
+      const title = 'Cartomancy Board'
+      createBoard(title)
         .then(res => {
-          expect(res.body.title).toEqual(board.title)
+          expect(res.body.title).toEqual(title)
           done()
         })
         .catch(done.fail)
@@ -38,16 +33,11 @@ describe('Boards API', () => {
 
   describe('PUT /api/boards', () =>
     it('should change the title of an existing board', done => {
-      const board = {
-        title: 'Cartomancy Board'
-      }
       const newTitle = 'Modified Board Title'
-      request(server)
-        .post('/api/boards')
-        .send(board)
+      createBoard('Cartomancy Board')
         .then(res => {
           const boardID = res.body._id
-          request(server)
+          return request(server)
             .put(`/api/boards/${boardID}`)
             .send({ title: newTitle })
             .expect(httpStatus.OK)
@@ -62,3 +52,13 @@ describe('Boards API', () => {
     })
   )
 })
+
+function createBoard (title) {
+  const board = {
+    title
+  }
+  return request(server)
+    .post('/api/boards')
+    .send(board)
+    .expect(httpStatus.OK)
+}
