@@ -7,7 +7,7 @@ import runSequence from 'run-sequence'
 const plugins = gulpLoadPlugins()
 
 const paths = {
-  js: ['./**/*.js', '!dist/**', '!node_modules/**'],
+  js: ['./**/*.js', '!./**/__tests__/**', '!dist/**', '!node_modules/**'],
   nonJs: ['./package.json', './.gitignore']
 }
 

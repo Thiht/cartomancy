@@ -18,7 +18,7 @@ const register = (req, username, password, done) => {
     .exec()
     .then(user => {
       if (user) {
-        throw new Error('Already used e-mail address')
+        throw new Error('Already used username')
       }
 
       const newUser = new User({
