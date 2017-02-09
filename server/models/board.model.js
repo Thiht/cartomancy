@@ -25,7 +25,7 @@ BoardSchema.statics = {
         if (board) {
           return board
         }
-        const err = new APIError('This board does not exist.', httpStatus.NOT_FOUND)
+        const err = new APIError('This board does not exist', httpStatus.NOT_FOUND)
         return Promise.reject(err)
       })
   },

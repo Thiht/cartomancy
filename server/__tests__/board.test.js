@@ -24,6 +24,7 @@ describe('Boards API', () => {
       const title = 'Cartomancy Board'
       createBoard(title)
         .then(res => {
+          expect(res.body._id).not.toBe('')
           expect(res.body.title).toEqual(title)
           done()
         })
