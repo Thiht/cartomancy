@@ -33,7 +33,7 @@ describe('Boards API', () => {
   )
 
   describe('PUT /api/boards', () =>
-    it('should change the title of an existing board', done => {
+    it.skip('should change the title of an existing board', done => {
       const newTitle = 'Modified Board Title'
       createBoard('Cartomancy Board')
         .then(res => {
