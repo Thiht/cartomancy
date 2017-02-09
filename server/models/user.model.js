@@ -21,7 +21,7 @@ UserSchema.statics = {
         if (user) {
           return user
         }
-        const err = new APIError('This user does not exist.', httpStatus.NOT_FOUND)
+        const err = new APIError('This user does not exist', httpStatus.NOT_FOUND, true)
         return Promise.reject(err)
       })
   }

@@ -2,6 +2,8 @@ import passport from 'passport'
 import Local from 'passport-local'
 import Jwt from 'passport-jwt'
 import User from './models/user.model'
+import httpStatus from 'http-status'
+import APIError from './helpers/APIError'
 
 import config from '../config'
 
@@ -18,7 +20,8 @@ const register = (req, username, password, done) => {
     .exec()
     .then(user => {
       if (user) {
-        throw new Error('Already used username')
+        const err = new APIError('Already used username', httpStatus.BAD_REQUEST, true)
+        return Promise.reject(err)
       }
 
       const newUser = new User({
@@ -45,11 +48,13 @@ const login = (req, username, password, done) => {
     .exec()
     .then(user => {
       if (!user) {
-        throw new Error('No user found using this e-mail address')
+        const err = new APIError('No user found using this e-mail address', httpStatus.BAD_REQUEST, true)
+        return Promise.reject(err)
       }
 
       if (!user.validPassword(password)) {
-        throw new Error('Wrong password')
+        const err = new APIError('Wrong password', httpStatus.BAD_REQUEST, true)
+        return Promise.reject(err)
       }
 
       return user
@@ -76,7 +81,8 @@ passport.use(new Jwt.Strategy(jwtStrategyOptions, (payload, done) => {
     .exec()
     .then(user => {
       if (!user) {
-        throw new Error('User not found')
+        const err = new APIError('User not found', httpStatus.BAD_REQUEST, true)
+        return Promise.reject(err)
       }
       done(null, user)
     })
