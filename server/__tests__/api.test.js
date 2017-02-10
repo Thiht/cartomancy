@@ -22,7 +22,7 @@ describe('Miscellaneous API', () => {
         .get('/api/404')
         .expect(httpStatus.NOT_FOUND)
         .then(res => {
-          expect(res.body.message).toEqual('Not Found')
+          expect(res.body.message).toEqual('API not found')
           done()
         })
         .catch(done.fail)
