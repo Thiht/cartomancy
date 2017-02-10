@@ -140,7 +140,7 @@ describe('Users API', () => {
         .expect(httpStatus.OK)
         .then(() => {
           return createUser(user2)
-            .expect(httpStatus.INTERNAL_SERVER_ERROR)
+            .expect(httpStatus.BAD_REQUEST)
         })
         .then(() => done())
         .catch(done.fail)
